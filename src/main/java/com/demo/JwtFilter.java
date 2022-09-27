@@ -1,7 +1,9 @@
 package com.demo;
 
+import com.okta.jwt.AccessTokenVerifier;
 import com.okta.jwt.Jwt;
 import com.okta.jwt.JwtVerificationException;
+import com.okta.jwt.JwtVerifiers;
 import jakarta.inject.Inject;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -18,8 +20,15 @@ public class JwtFilter implements Filter {
     @Inject
     OpenIdConfig openIdConfig;
 
-    @Inject
-    TokenVerifier verifier;
+    private AccessTokenVerifier jwtVerifier;
+
+    @Override
+    public void init(FilterConfig filterConfig) {
+        LOGGER.info("jwtVerifier initialized for issuer:" + openIdConfig.getIssuerUri());
+        jwtVerifier = JwtVerifiers.accessTokenVerifierBuilder()
+                .setIssuer(openIdConfig.getIssuerUri())
+                .build();
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
@@ -39,8 +48,9 @@ public class JwtFilter implements Filter {
         } else {
             String accessToken = authHeader.substring(authHeader.indexOf("Bearer ") + 7);
             try {
-                Jwt jwt = verifier.decode(accessToken);
+                Jwt jwt = jwtVerifier.decode(accessToken);
                 LOGGER.info("JWT decoded. sub=" + jwt.getClaims().get("sub"));
+                request.setAttribute("jwt", jwt);
             } catch (JwtVerificationException e) {
                 LOGGER.severe("Failed to verify JWT with error message: " + e.getMessage());
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
