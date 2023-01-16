@@ -2,9 +2,9 @@ package com.demo;
 
 import java.io.IOException;
 
+import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.security.enterprise.SecurityContext;
-import jakarta.security.enterprise.authentication.mechanism.http.OpenIdAuthenticationMechanismDefinition;
 import jakarta.security.enterprise.identitystore.openid.OpenIdContext;
 import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.servlet.annotation.ServletSecurity;
@@ -13,17 +13,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@OpenIdAuthenticationMechanismDefinition(
-        providerURI = "${openIdConfig.issuerUri}",
-        clientId = "${openIdConfig.clientId}",
-        clientSecret = "${openIdConfig.clientSecret}",
-        redirectURI = "${baseURL}/callback",
-        // default 500ms caused timeouts for me
-        jwksConnectTimeout = 2000,
-        jwksReadTimeout = 2000
-  )
 @WebServlet("/protected")
-@ServletSecurity(@HttpConstraint(rolesAllowed = "Everyone"))
+@DeclareRoles({"foo", "bar", "kaz"})
+@ServletSecurity(
+        @HttpConstraint(rolesAllowed = "foo")
+)
 public class ProtectedServlet extends HttpServlet {
 
         @Inject

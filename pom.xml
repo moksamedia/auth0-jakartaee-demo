@@ -33,7 +33,7 @@
 
         <!-- Wildfly server -->
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
-        <wildfly.version>27.0.0.Alpha5</wildfly.version>
+        <wildfly.version>27.0.0.Final</wildfly.version>
         <wildfly-maven-plugin.version>4.0.0.Beta3</wildfly-maven-plugin.version>
         <jboss-as.home>${project.build.directory}/wildfly-preview-${wildfly.version}</jboss-as.home>
 
@@ -49,6 +49,23 @@
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee-api.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.soteria</groupId>
+            <artifactId>jakarta.security.enterprise</artifactId>
+            <version>3.0.1-TEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../soteria/impl/target/jakarta.security.enterprise-3.0.1-TEST.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>jwks-rsa</artifactId>
+            <version>0.21.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.2.1</version>
         </dependency>
         <!-- REQUIRED FOR OKTA JWT VERIFICATION -->
         <dependency>
@@ -137,7 +154,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -215,4 +231,5 @@
             </snapshots>
         </repository>
     </repositories>
+
 </project>
