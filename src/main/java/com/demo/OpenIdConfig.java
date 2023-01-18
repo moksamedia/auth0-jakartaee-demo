@@ -11,17 +11,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@OpenIdAuthenticationMechanismDefinition(
-        providerURI = "${openIdConfig.issuerUri}",
-        clientId = "${openIdConfig.clientId}",
-        clientSecret = "${openIdConfig.clientSecret}",
-        redirectURI = "${baseURL}/callback",
-        // default 500ms caused timeouts for me
-        jwksConnectTimeout = 5000,
-        jwksReadTimeout = 5000,
-        extraParameters = {"audience=http://my-api"},
-        claimsDefinition = @ClaimsDefinition( callerGroupsClaim = "http://my-api/groups" )
-)
 @ApplicationScoped
 @Named("openIdConfig")
 public class OpenIdConfig {
