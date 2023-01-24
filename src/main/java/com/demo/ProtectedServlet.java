@@ -24,35 +24,34 @@ import jakarta.servlet.http.HttpServletResponse;
         jwksConnectTimeout = 5000,
         jwksReadTimeout = 5000,
         extraParameters = {"audience=http://my-api"},
-        claimsDefinition = @ClaimsDefinition( callerGroupsClaim = "http://www.jakartaee.demo/roles" )
+        claimsDefinition = @ClaimsDefinition(callerGroupsClaim = "http://www.jakartaee.demo/roles")
 )
 @WebServlet("/protected")
-//@DeclareRoles({"foo", "bar", "adm"})
 @ServletSecurity(
         @HttpConstraint(rolesAllowed = "Everyone")
 )
 public class ProtectedServlet extends HttpServlet {
 
-        @Inject
-        private OpenIdContext context;
+    @Inject
+    private OpenIdContext context;
 
-        @Inject
-        SecurityContext securityContext;
+    @Inject
+    SecurityContext securityContext;
 
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-                var principal = securityContext.getCallerPrincipal();
-                var name = principal.getName();
+        var principal = securityContext.getCallerPrincipal();
+        var name = principal.getName();
 
-                response.setContentType("text/html");
-                response.getWriter().println("<h1>Protected Servlet</h1>");
-                response.getWriter().println("<p>Principal name:" + name + "</p>");
-                response.getWriter().println("<p>access token:" + context.getAccessToken() + "</p>");
-                response.getWriter().println("<p>token type:" + context.getTokenType() + "</p>");
-                response.getWriter().println("<p>subject:" + context.getSubject() + "</p>");
-                response.getWriter().println("<p>expires in:" + context.getExpiresIn() + "</p>");
-                response.getWriter().println("<p>refresh token:" + context.getRefreshToken() + "</p>");
-                response.getWriter().println("<p>claims json:" + context.getClaimsJson() + "</p>");
-        }
+        response.setContentType("text/html");
+        response.getWriter().println("<h1>Protected Servlet</h1>");
+        response.getWriter().println("<p>Principal name:" + name + "</p>");
+        response.getWriter().println("<p>access token:" + context.getAccessToken() + "</p>");
+        response.getWriter().println("<p>token type:" + context.getTokenType() + "</p>");
+        response.getWriter().println("<p>subject:" + context.getSubject() + "</p>");
+        response.getWriter().println("<p>expires in:" + context.getExpiresIn() + "</p>");
+        response.getWriter().println("<p>refresh token:" + context.getRefreshToken() + "</p>");
+        response.getWriter().println("<p>claims json:" + context.getClaimsJson() + "</p>");
+    }
 }

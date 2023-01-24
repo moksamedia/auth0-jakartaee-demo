@@ -65,7 +65,7 @@ public class JwtFilter implements Filter {
                 LOGGER.info("JWT decoded. sub=" + jwt.getClaims().get("sub"));
                 request.setAttribute("jwt", jwt);
 
-            } catch (JWTVerificationException e){
+            } catch (JWTVerificationException e) {
                 e.printStackTrace();
                 LOGGER.severe("Failed to verify JWT with error message: " + e.getMessage());
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
