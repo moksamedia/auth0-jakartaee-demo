@@ -157,8 +157,7 @@
                 <configuration>
                     <commands>
                         <command>
-                            /subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi,
-                            value=false)
+                            /subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi, value=false)
                         </command>
                         <command>reload</command>
                     </commands>

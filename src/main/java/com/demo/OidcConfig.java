@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-@Named("openIdConfig")
+@Named("oidcConfig")
 public class OidcConfig {
     private static final Logger LOGGER = Logger.getLogger(OidcConfig.class.getName());
 
@@ -29,7 +29,7 @@ public class OidcConfig {
             clientSecret = properties.getProperty("clientSecret");
             issuerUri = properties.getProperty("issuerUri");
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Failed to load openid.properties", e);
+            LOGGER.log(Level.SEVERE, "Failed to load oidc.properties", e);
         }
     }
 
