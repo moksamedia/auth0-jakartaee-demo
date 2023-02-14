@@ -14,8 +14,8 @@ public class ApiServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        DecodedJWT jwt = (DecodedJWT)request.getAttribute("jwt");
-        response.setContentType("text");
+        DecodedJWT jwt = (DecodedJWT) request.getAttribute("jwt");
+        response.setContentType("text/plain");
         response.getWriter().println("Welcome, " + jwt.getClaims().get("sub"));
         response.getWriter().println(jwt.getClaims());
     }

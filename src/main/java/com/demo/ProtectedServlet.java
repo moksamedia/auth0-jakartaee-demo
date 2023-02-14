@@ -16,19 +16,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @OpenIdAuthenticationMechanismDefinition(
-        providerURI = "${openIdConfig.issuerUri}",
-        clientId = "${openIdConfig.clientId}",
-        clientSecret = "${openIdConfig.clientSecret}",
-        redirectURI = "${baseURL}/callback",
-        // default 500ms caused timeouts for me
-        jwksConnectTimeout = 5000,
-        jwksReadTimeout = 5000,
-        extraParameters = {"audience=http://my-api"},
-        claimsDefinition = @ClaimsDefinition(callerGroupsClaim = "http://www.jakartaee.demo/roles")
+    providerURI = "${openIdConfig.issuerUri}",
+    clientId = "${openIdConfig.clientId}",
+    clientSecret = "${openIdConfig.clientSecret}",
+    redirectURI = "${baseURL}/callback",
+    // default 500ms caused timeouts for me
+    jwksConnectTimeout = 5000,
+    jwksReadTimeout = 5000,
+    extraParameters = {"audience=https://${openIdConfig.issuerUri}/api/v2/"},
+    claimsDefinition = @ClaimsDefinition(callerGroupsClaim = "http://www.jakartaee.demo/roles")
 )
 @WebServlet("/protected")
 @ServletSecurity(
-        @HttpConstraint(rolesAllowed = "Everyone")
+    @HttpConstraint(rolesAllowed = "Everyone")
 )
 public class ProtectedServlet extends HttpServlet {
 

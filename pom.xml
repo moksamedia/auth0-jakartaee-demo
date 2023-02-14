@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.demo</groupId>
     <artifactId>jakartaee10-oidc-test</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>demo-jakartaee-10-oidc</name>
+    <name>auth0-jakarta-ee-oidc-example</name>
     <description>Demo JakartaEE OIDC application</description>
 
     <properties>
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>17</maven.compiler.release>
@@ -156,7 +156,10 @@
                 <version>${wildfly-maven-plugin.version}</version>
                 <configuration>
                     <commands>
-                        <command>/subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi, value=false)</command>
+                        <command>
+                            /subsystem=undertow/application-security-domain=other:write-attribute(name=integrated-jaspi,
+                            value=false)
+                        </command>
                         <command>reload</command>
                     </commands>
                 </configuration>

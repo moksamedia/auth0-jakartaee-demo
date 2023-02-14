@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jakartaee10-oidc-test" />
+        <module name="auth0-jakarta-ee-oidc-example" />
       </profile>
     </annotationProcessing>
   </component>

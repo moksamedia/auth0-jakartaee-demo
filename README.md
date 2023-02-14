@@ -10,17 +10,15 @@ Before you start, please make sure you have the following prerequisites installe
 
 **You will need a free Auth0 developer account** if you don't already have one. Go ahead and sign up for an Auth0 account using [their sign-up page](https://auth0.com/signup).
 
- ## Create Auth0 API and OIDC Application
+ ## Create an OIDC Application
  
- You will need to have created a free Auth0 developer account and logged into the account using the CLI.
+You will need to have a free Auth0 developer account and log in to the account using the CLI.
+
+```shell
+auth0 login
+```
  
- Use the following command to create a custom API on Auth0.
- ```bash
- auth0 apis create -n myapi --identifier http://my-api
- ```
- Press enter three times to accept the default values for scopes, token lifetime, and to allow offline access.
- 
- Now use the Auth0 CLI to create an OpenID Connect (OIDC) application.  From the project base directory, run the following.
+Use the Auth0 CLI to create an OpenID Connect (OIDC) application.  From the project base directory, run the following.
 
 ```bash
 auth0 apps create
@@ -29,7 +27,6 @@ auth0 apps create
 Use the following values:
 
 - **Name**: `javartaee-demo`
-
 - **Description**: whatever you like, or leave blank
 - **Type**: `Regular Web Application`
 - **Callback URLs**: `http://localhost:8080/callback`
@@ -44,8 +41,9 @@ auth0 apps open
 Select the OIDC app (or client) you just created from the list. This will open the OIDC application on the Auth0 dashboard.
 
 Fill in the three values in `src/main/resources/openid.properties`. Replace the bracketed values with the values from the OIDC application page on the Auth0 dashboard.
+
 ```bash
-issuerUri=<your-auth0-domain>
+issuerUri=https://<your-auth0-domain>
 clientId=<your-client-id>
 clientSecret=<your-client-secret>
 ```
@@ -92,7 +90,25 @@ Click **Apply** (top right of the panel).
 ## Start the project
 
 Use this command to start the project.
+
 ```bash
 ./mvnw wildfly:run
 ```
-Using a browser, open http://localhost:8080/protected
+
+Using a browser, open `http://localhost:8080/protected`. You should be prompted to log in.
+
+## Links
+
+This example uses the following open source libraries:
+
+* [WildFly](https://www.wildfly.org/)
+* jwks-rsa
+* java-jwt
+
+## Help
+
+Please post any questions as comments on the [blog post](tbd), or visit our [Auth0 Community](https://community.auth0.com/).
+
+## License
+
+Apache 2.0, see [LICENSE](LICENSE).
