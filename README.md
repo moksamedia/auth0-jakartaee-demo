@@ -102,8 +102,8 @@ Using a browser, open `http://localhost:8080/protected`. You should be prompted 
 This example uses the following open source libraries:
 
 * [WildFly](https://www.wildfly.org/)
-* jwks-rsa
-* java-jwt
+* [jwks-rsa-java](https://github.com/auth0/jwks-rsa-java)
+* [java-jwt](https://github.com/auth0/java-jwt)
 
 ## Help
 
