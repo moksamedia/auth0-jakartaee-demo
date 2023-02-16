@@ -2,7 +2,6 @@ package com.demo;
 
 import java.io.IOException;
 
-import jakarta.annotation.security.DeclareRoles;
 import jakarta.inject.Inject;
 import jakarta.security.enterprise.SecurityContext;
 import jakarta.security.enterprise.authentication.mechanism.http.OpenIdAuthenticationMechanismDefinition;
@@ -16,14 +15,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @OpenIdAuthenticationMechanismDefinition(
-        providerURI = "${openIdConfig.issuerUri}",
-        clientId = "${openIdConfig.clientId}",
-        clientSecret = "${openIdConfig.clientSecret}",
+        clientId = "${oidcConfig.clientId}",
+        clientSecret = "${oidcConfig.clientSecret}",
         redirectURI = "${baseURL}/callback",
-        // default 500ms caused timeouts for me
+        providerURI = "${oidcConfig.issuerUri}",
         jwksConnectTimeout = 5000,
         jwksReadTimeout = 5000,
-        extraParameters = {"audience=http://my-api"},
+        extraParameters = {"audience=https://<your-auth0-domain>/api/v2/"},
         claimsDefinition = @ClaimsDefinition(callerGroupsClaim = "http://www.jakartaee.demo/roles")
 )
 @WebServlet("/protected")

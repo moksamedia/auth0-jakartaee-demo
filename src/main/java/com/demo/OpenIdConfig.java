@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-@Named("openIdConfig")
+@Named("oidcConfig")
 public class OpenIdConfig {
     private static final Logger LOGGER = Logger.getLogger(OpenIdConfig.class.getName());
 
@@ -29,7 +29,7 @@ public class OpenIdConfig {
             domain = properties.getProperty("domain");
             clientId = properties.getProperty("clientId");
             clientSecret = properties.getProperty("clientSecret");
-            issuerUri = properties.getProperty("issuerUri");
+            issuerUri = "https://" + this.domain + "/";
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Failed to load openid.properties", e);
         }
@@ -50,5 +50,4 @@ public class OpenIdConfig {
     public String getIssuerUri() {
         return issuerUri;
     }
-
 }
