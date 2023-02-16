@@ -3,8 +3,6 @@ package com.demo;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
-import jakarta.security.enterprise.authentication.mechanism.http.OpenIdAuthenticationMechanismDefinition;
-import jakarta.security.enterprise.authentication.mechanism.http.openid.ClaimsDefinition;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -12,8 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-@Named("oidcConfig")
+@Named("openIdConfig")
 public class OpenIdConfig {
+
     private static final Logger LOGGER = Logger.getLogger(OpenIdConfig.class.getName());
 
     private String domain;
@@ -25,13 +24,13 @@ public class OpenIdConfig {
     void init() {
         try {
             var properties = new Properties();
-            properties.load(getClass().getResourceAsStream("/openid.properties"));
+            properties.load(getClass().getResourceAsStream("/oidc.properties"));
             domain = properties.getProperty("domain");
             clientId = properties.getProperty("clientId");
             clientSecret = properties.getProperty("clientSecret");
             issuerUri = "https://" + this.domain + "/";
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Failed to load openid.properties", e);
+            LOGGER.log(Level.SEVERE, "Failed to load oidc.properties", e);
         }
     }
 

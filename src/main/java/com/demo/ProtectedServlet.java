@@ -15,10 +15,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @OpenIdAuthenticationMechanismDefinition(
-        clientId = "${oidcConfig.clientId}",
-        clientSecret = "${oidcConfig.clientSecret}",
+        clientId = "${openIdConfig.clientId}",
+        clientSecret = "${openIdConfig.clientSecret}",
         redirectURI = "${baseURL}/callback",
-        providerURI = "${oidcConfig.issuerUri}",
+        providerURI = "${openIdConfig.issuerUri}",
         jwksConnectTimeout = 5000,
         jwksReadTimeout = 5000,
         extraParameters = {"audience=https://<your-auth0-domain>/api/v2/"},
@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpServletResponse;
 )
 @WebServlet("/protected")
 @ServletSecurity(
-        @HttpConstraint(rolesAllowed = "Everyone")
+    @HttpConstraint(rolesAllowed = "Everyone")
 )
 public class ProtectedServlet extends HttpServlet {
 

@@ -16,11 +16,10 @@ public class CallbackServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         String referer = (String) request.getSession().getAttribute("Referer");
         String redirectTo = referer != null ? referer : request.getContextPath() + "/protected";
         LOGGER.info("OIDC callback success. Redirecting to: " + redirectTo);
         response.sendRedirect(redirectTo);
     }
-
 }
