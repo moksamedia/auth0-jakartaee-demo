@@ -42,14 +42,27 @@ public class ProtectedServlet extends HttpServlet {
         var principal = securityContext.getCallerPrincipal();
         var name = principal.getName();
 
+        String html = """
+                <div style="margin: 0 10%%; width: 80%%; overflow-wrap: anywhere;">
+                    <h1>Protected Servlet</h1>
+                    <p>principal name: %s </p>
+                    <p>access token (type = %s):</p>
+                    <p>%s</p>
+                    <p>preferred_username: %s</p>
+                    <p>roles: %s</p>
+                    <p>claims:</p>
+                    <p>%s</p>
+                </div>
+                """.formatted(
+                        name,
+                        context.getTokenType(),
+                        context.getAccessToken(),
+                        context.getClaimsJson().get("preferred_username").toString(),
+                        context.getClaimsJson().get("http://www.jakartaee.demo/roles").toString(),
+                        context.getClaimsJson()
+                );
+
         response.setContentType("text/html");
-        response.getWriter().println("<h1>Protected Servlet</h1>");
-        response.getWriter().println("<p>Principal name:" + name + "</p>");
-        response.getWriter().println("<p>access token:" + context.getAccessToken() + "</p>");
-        response.getWriter().println("<p>token type:" + context.getTokenType() + "</p>");
-        response.getWriter().println("<p>subject:" + context.getSubject() + "</p>");
-        response.getWriter().println("<p>expires in:" + context.getExpiresIn() + "</p>");
-        response.getWriter().println("<p>refresh token:" + context.getRefreshToken() + "</p>");
-        response.getWriter().println("<p>claims json:" + context.getClaimsJson() + "</p>");
+        response.getWriter().print(html.toString());
     }
 }

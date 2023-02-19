@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="auth0-jakarta-ee-oidc-example" />
         <module name="jakartaee10-oidc-test" />
+        <module name="QA" />
       </profile>
     </annotationProcessing>
   </component>
