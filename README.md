@@ -48,6 +48,8 @@ clientId=<your-client-id>
 clientSecret=<your-client-secret>
 ```
 
+In `src/main/java/com/demo/ProtectedServlet.java`, replace `<your-auth0-domain` in the `@OpenIdAuthenticationMechanismDefinition` annotation with your actual Auth0 domain.
+
 ## Configure Roles on Auth0
 
 Open your [Auth0 developer dashboard](https://manage.auth0.com). You need to create a role, assign your user to that role, and create an action that will inject the roles into a custom claim in the JWT.
