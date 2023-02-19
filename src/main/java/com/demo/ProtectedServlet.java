@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
         providerURI = "${openIdConfig.issuerUri}",
         jwksConnectTimeout = 5000,
         jwksReadTimeout = 5000,
-        extraParameters = {"audience=https://<your-auth0-domain>/api/v2/"},
+        extraParameters = {"audience=https://<your-auth0-domain>/api/v2/"}, // <-- YOUR AUTH0 DOMAIN HERE
         claimsDefinition = @ClaimsDefinition(callerGroupsClaim = "http://www.jakartaee.demo/roles")
 )
 @WebServlet("/protected")

@@ -24,7 +24,7 @@ public class OpenIdConfig {
     void init() {
         try {
             var properties = new Properties();
-            properties.load(getClass().getResourceAsStream("/oidc.properties"));
+            properties.load(getClass().getResourceAsStream("/openid.properties"));
             domain = properties.getProperty("domain");
             clientId = properties.getProperty("clientId");
             clientSecret = properties.getProperty("clientSecret");

@@ -22,11 +22,11 @@ public class JwtFilter implements Filter {
     private static final Logger LOGGER = Logger.getLogger(JwtFilter.class.getName());
 
     @Inject
-    OidcConfig oidcConfig;
+    OpenIdConfig openIdConfig;
 
     @Override
     public void init(FilterConfig filterConfig) {
-        LOGGER.info("Auth0 jwtVerifier initialized for issuer:" + oidcConfig.getIssuerUri());
+        LOGGER.info("Auth0 jwtVerifier initialized for issuer:" + openIdConfig.getIssuerUri());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class JwtFilter implements Filter {
         } else {
             String accessToken = authHeader.substring(authHeader.indexOf("Bearer ") + 7);
             LOGGER.info("accesstoken: " + request.getRequestURI());
-            JwkProvider provider = new UrlJwkProvider(oidcConfig.getIssuerUri());
+            JwkProvider provider = new UrlJwkProvider(openIdConfig.getIssuerUri());
             try {
                 DecodedJWT jwt = JWT.decode(accessToken);
                 // Get the kid from received JWT token
@@ -56,7 +56,7 @@ public class JwtFilter implements Filter {
                 Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(), null);
 
                 JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer(oidcConfig.getIssuerUri())
+                    .withIssuer(openIdConfig.getIssuerUri())
                     .build();
 
                 jwt = verifier.verify(accessToken);
