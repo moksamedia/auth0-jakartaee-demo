@@ -10,10 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-@Named("openIdConfig")
-public class OpenIdConfig {
+@Named("oidcConfig")
+public class OidcConfig {
 
-    private static final Logger LOGGER = Logger.getLogger(OpenIdConfig.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(OidcConfig.class.getName());
 
     private String domain;
     private String clientId;
