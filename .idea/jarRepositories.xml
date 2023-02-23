@@ -17,16 +17,6 @@
       <option name="url" value="https://oss.sonatype.org/content/repositories/snapshots/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="project_lib" />
-      <option name="name" value="Repository in project's lib dir" />
-      <option name="url" value="file:////home/andrewcarterhughes/Development/okta/2022/jakarta-ee-oidc/security-oidc/../soteria/impl/target" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="project_lib" />
-      <option name="name" value="Repository in project's lib dir" />
-      <option name="url" value="file:////home/andrewcarterhughes/Development/okta/2022/jakarta-ee-oidc/security-oidc/../soteria/impl/target/jakarta.security.enterprise-3.0.1-TEST.jar" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />
