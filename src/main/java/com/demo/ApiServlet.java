@@ -14,9 +14,11 @@ public class ApiServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        DecodedJWT jwt = (DecodedJWT) request.getAttribute("jwt");
+        DecodedJWT jwt = (DecodedJWT) request.getAttribute("accessToken");
+        IdToken idToken = (IdToken) request.getAttribute("idToken");
         response.setContentType("text/plain");
-        response.getWriter().println("Welcome, " + jwt.getClaims().get("sub"));
-        response.getWriter().println(jwt.getClaims());
+        response.getWriter().println("Welcome, " + idToken.email);
+        response.getWriter().println("accessToken claims:" + jwt.getClaims());
+        response.getWriter().println("idToken claims:" + idToken.toString());
     }
 }
